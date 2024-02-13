@@ -8,33 +8,40 @@ import re
 # Task 1
 
 def get_days_from_today(date):
-    current_time= dtdt.today()
-    earn_date= dtdt.strptime(date,"%Y-%m-%d")
+    try:
+        current_time= dtdt.today()
+        earn_date= dtdt.strptime(date,"%Y-%m-%d")
 
-    return (current_time-earn_date).days
+        return (current_time-earn_date).days
+    except ValueError:
+        return "Invalid date format. Please provide the date in the format 'YYYY-MM-DD'."
 
 print(get_days_from_today("2026-10-09"))
+
 
 #Task 2
 
 def get_numbers_ticket(min, max, quantity):
-   if min < 1 or max > 1000 or quantity < min and quantity > max:
+    if min < 1 or max > 1000 or quantity < min and quantity > max:
       print("Enter min > 1 and max < 1000")
-      return
+      return []
    
-   n =0
-   unique_numbers = set()
+    if min > max:
+        return []
 
-   while n< quantity:
+    n =0
+    unique_numbers = set()
+
+    while n<= quantity:
       counters = random.randint(min,max)
       n+=1
       unique_numbers.add(counters)  
 
-   nums = list(unique_numbers)
-   nums.sort()
-   return nums 
+    nums = list(unique_numbers)
+    nums.sort()
+    return nums 
 
-print(get_numbers_ticket(1,42,6))
+print(get_numbers_ticket(10,15,5))
 
 # Task 3
 
@@ -45,6 +52,9 @@ def normalize_phone(phone_number):
 
     if normalize_number.startswith("380"):
         return "+38" + normalize_number[2:]
+    
+    elif len(normalize_number)==12:
+        return "+" + normalize_number
       
     elif not normalize_number.startswith("+"):
         return "+38" + normalize_number
@@ -63,6 +73,7 @@ raw_numbers = [
     "(050)8889900",
     "38050-111-22-22",
     "38050 111 22 11   ",
+    "432 11 222 22 22"
 ]
 
 sanitized_numbers = [normalize_phone(num) for num in raw_numbers]
@@ -73,15 +84,15 @@ print("Нормалізовані номери телефонів для SMS-р�
 
 def get_upcoming_birthdays(users=None):
     tdate=dtdt.today().date() # беремо сьогоднішню дату
-    birthdays=[] # створюємо список для результатів
+    birthdays=[] 
 
     for user in users: # перебираємо користувачів
-        bdate=user["birthday"] # отримуємо дату народження людини у вигляді рядка
+        bdate=user["birthday"] 
         bdate=str(tdate.year)+bdate[4:] # Замінюємо рік на поточний
        
         bdate=dtdt.strptime(bdate, "%Y.%m.%d").date() # перетворюємо дату народження в об’єкт date
         week_day=bdate.isoweekday() # Отримуємо день тижня (1-7)
-        days_between=(bdate-tdate).days # рахуємо різницю між зараз і днем народження цьогоріч у днях
+        days_between=(bdate-tdate).days 
 
         if 0<=days_between<7:
 
