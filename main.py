@@ -7,77 +7,77 @@ import re
 
 # Task 1
 
-# def get_days_from_today(date):
-#     try:
-#         current_time= dtdt.today()
-#         earn_date= dtdt.strptime(date,"%Y-%m-%d")
+def get_days_from_today(date):
+    try:
+        current_time= dtdt.today()
+        earn_date= dtdt.strptime(date,"%Y-%m-%d")
 
-#         return (current_time-earn_date).days
-#     except ValueError:
-#         return "Invalid date format. Please provide the date in the format 'YYYY-MM-DD'."
+        return (current_time-earn_date).days
+    except ValueError:
+        return "Invalid date format. Please provide the date in the format 'YYYY-MM-DD'."
 
-# print(get_days_from_today("2026-10-09"))
+print(get_days_from_today("2026-10-09"))
 
 
 #Task 2
 
-# def get_numbers_ticket(min, max, quantity):
-#     if min < 1 or max > 1000 or quantity < min and quantity > max:
-#       print("Enter min > 1 and max < 1000")
-#       return []
+def get_numbers_ticket(min, max, quantity):
+    if min < 1 or max > 1000 or min > max or quantity <= min or quantity >= max:
+      print("Enter min > 1 and max < 1000")
+      return []
    
-#     if min > max:
-#         return []
 
-#     n =0
-#     unique_numbers = set()
+    n =0
+    unique_numbers = set()
 
-#     while n<= quantity:
-#       counters = random.randint(min,max)
-#       n+=1
-#       unique_numbers.add(counters)  
+    while n< quantity:
+      counters = random.randint(min,max)
 
-#     nums = list(unique_numbers)
-#     nums.sort()
-#     return nums 
+      if counters not in unique_numbers:  
+        n+=1
+        unique_numbers.add(counters)  
 
-# print(get_numbers_ticket(10,15,5))
+    nums = list(unique_numbers)
+    nums.sort()
+    return nums 
+
+print(get_numbers_ticket(4, 14, 5))
 
 # Task 3
 
-# def normalize_phone(phone_number):
-#     find_number= r'[^0-9+]'
+def normalize_phone(phone_number):
+    find_number= r'[^0-9+]'
 
-#     normalize_number = re.sub(find_number,'',phone_number)
+    normalize_number = re.sub(find_number,'',phone_number)
 
-#     if normalize_number.startswith("380"):
-#         return "+38" + normalize_number[2:]
+    if normalize_number.startswith("380"):
+        return "+38" + normalize_number[2:]
     
-#     elif len(normalize_number)==12:
-#         return "+" + normalize_number
+    elif len(normalize_number)==12:
+        return "+" + normalize_number
       
-#     elif not normalize_number.startswith("+"):
-#         return "+38" + normalize_number
+    elif not normalize_number.startswith("+"):
+        return "+38" + normalize_number
     
     
-#     return normalize_number
+    return normalize_number
  
 
-# raw_numbers = [
-#     "067\\t123 4567",
-#     "(095) 234-5678\\n",
-#     "+380 44 123 4567",
-#     "380501234567",
-#     "    +38(050)123-32-34",
-#     "     0503451234",
-#     "(050)8889900",
-#     "38050-111-22-22",
-#     "38050 111 22 11   ",
-#     "432 11 222 22 22"
-# ]
+raw_numbers = [
+    "067\\t123 4567",
+    "(095) 234-5678\\n",
+    "+380 44 123 4567",
+    "380501234567",
+    "    +38(050)123-32-34",
+    "     0503451234",
+    "(050)8889900",
+    "38050-111-22-22",
+    "38050 111 22 11   ",
+    "432 11 222 22 22"
+]
 
-# sanitized_numbers = [normalize_phone(num) for num in raw_numbers]
-# print("Нормалізовані номери телефонів для SMS-розсилки:", sanitized_numbers)
+sanitized_numbers = [normalize_phone(num) for num in raw_numbers]
+print("Нормалізовані номери телефонів для SMS-розсилки:", sanitized_numbers)
 
 
 # Task 4
