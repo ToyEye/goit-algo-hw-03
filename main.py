@@ -22,7 +22,7 @@ print(get_days_from_today("2026-10-09"))
 #Task 2
 
 def get_numbers_ticket(min, max, quantity):
-    if min < 1 or max > 1000 or min > max or quantity <= min or quantity >= max:
+    if min < 1 or max > 1000 or min >= max or quantity < 1 or quantity > (max - min + 1):
       print("Enter min > 1 and max < 1000")
       return []
    
@@ -41,7 +41,7 @@ def get_numbers_ticket(min, max, quantity):
     nums.sort()
     return nums 
 
-print(get_numbers_ticket(4, 14, 5))
+print(get_numbers_ticket(10, 20, 5))
 
 # Task 3
 
